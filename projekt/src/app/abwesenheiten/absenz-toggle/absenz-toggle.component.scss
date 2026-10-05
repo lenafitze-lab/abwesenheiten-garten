@@ -1,0 +1,132 @@
+:host {
+  display: block;
+}
+
+.kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.schliessen-button {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  margin: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-radius: 50%;
+  --background: transparent;
+  --background-hover: rgba(var(--ion-color-medium-rgb), 0.12);
+  --background-activated: rgba(var(--ion-color-medium-rgb), 0.12);
+  --color: var(--text-muted);
+  --box-shadow: none;
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.inhalt {
+  padding: 24px 24px 20px;
+}
+
+.termin-name {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.status-kacheln {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.kachel {
+  width: 100px;
+  height: auto;
+  margin: 0;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-radius: 12px;
+  --border-width: 1px;
+  --border-color: var(--border);
+  --background: transparent;
+  --background-hover: transparent;
+  --background-activated: transparent;
+  --box-shadow: none;
+  font: inherit;
+
+  // ion-button ordnet Icon/Text standardmässig nebeneinander (Zeile) -
+  // für die Kachel-Optik (Icon oben, Label darunter) muss die interne
+  // Flex-Richtung über den Shadow-Part umgedreht werden.
+  &::part(native) {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  ion-icon {
+    font-size: 22px;
+    color: var(--text-muted);
+  }
+
+  span {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+  }
+
+  &.kachel--anwesend span {
+    font-weight: 600;
+  }
+
+  &.kachel--abwesend span {
+    font-weight: 500;
+  }
+
+  &.aktiv {
+    --background: var(--ion-color-primary);
+    --border-color: var(--ion-color-primary-shade);
+
+    ion-icon,
+    span {
+      color: var(--ion-color-primary-contrast);
+    }
+  }
+}
+
+.grund-feld {
+  --border-radius: 12px;
+  margin-top: 20px;
+}
+
+.privat-toggle {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.speichern-button {
+  margin: 24px 0 0;
+  --border-radius: 12px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  height: auto;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}

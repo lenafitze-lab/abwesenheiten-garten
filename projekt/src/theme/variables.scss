@@ -1,0 +1,99 @@
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+
+/** Primary theme color (Ionic components, tab bar, segments, buttons, ...).
+ * Change only these variables to restyle the whole app consistently. **/
+:root {
+  --ion-color-primary: #d1a03a;
+  --ion-color-primary-rgb: 209, 160, 58;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #b88d33;
+  --ion-color-primary-tint: #d6a94e;
+
+  /* Warnung/destruktive Aktionen: bewusst unabhängig vom Farbschema
+   * (Gelb/Rot) immer dasselbe Rot, damit eine Warnung nie mit der
+   * normalen Akzentfarbe verwechselt werden kann - auch nicht, wenn
+   * jemand "Rot" als Farbschema gewählt hat. */
+  --ion-color-danger: #c0392b;
+  --ion-color-danger-rgb: 192, 57, 43;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #a93226;
+  --ion-color-danger-tint: #c9574b;
+
+  /* Textfarbe für Badges mit halbtransparentem Danger-Hintergrund
+   * (rgba(--ion-color-danger-rgb, 0.15), z.B. .abgesagt-label) - die volle
+   * --ion-color-danger als Text darauf erreicht nur ~4.3:1 (Hell) bzw.
+   * ~2.7:1 (Dunkel), ein Accessibility-Audit bemängelte das. Hier bewusst
+   * die bereits vorhandene --ion-color-danger-shade wiederverwendet statt
+   * einer neuen Farbe, im Dark Mode ein eigener, ausreichend heller Ton. */
+  --ion-color-danger-badge-text: var(--ion-color-danger-shade);
+
+  /* Deckkraft des farbigen Verlaufs hinter Auth-/Profil-Headern.
+   * Im Dark Mode deutlich niedriger, da eine kräftige Farbe auf fast
+   * schwarzem Grund sonst schmutzig/stechend wirkt statt dezent. */
+  --auth-tint-opacity: 0.14;
+
+  /* Generische Text-/Rahmen-Töne für reduzierte, kartenbasierte Layouts. */
+  --text-muted: #8a8a8e;
+  --text-secondary: #636366;
+  --border: rgba(0, 0, 0, 0.12);
+
+  /* Kartenhintergrund für Layouts, die sonst nur mit einer Border gegen
+   * die Seite abgesetzt sind (z.B. Termin-Karten). Im Hellmodus bewusst
+   * "leer" (Karte = Seitenhintergrund + Border), im Dark Mode ein Tick
+   * heller als der Seitenhintergrund gesetzt (siehe unten). */
+  --card-background: transparent;
+
+  /* Dezente, gefüllte "erhöhte" Fläche (Badges, gruppierte Info-Karten) -
+   * im Unterschied zu --card-background hier bewusst auch im Hellmodus
+   * sichtbar gefüllt statt transparent. */
+  --surface-2: #f2f2f5;
+}
+
+:root.ion-palette-dark {
+  --auth-tint-opacity: 0.06;
+}
+
+/* Weicheres Dark Mode statt hartem Reinschwarz: gedämpfter
+ * Grundton, ein Tick hellerer Kartenhintergrund mit dezenter statt
+ * reisserischer Border, entsättigtes Akzent-Gelb (leuchtet sonst auf
+ * dunklem Grund) und abgestufte statt reinweisse Textfarben. Beide
+ * Ionic-Modi (.ios/.md) explizit adressiert und mit :root zusätzlich
+ * höher spezifisch als Ionics eigene dark.class.css, damit diese Werte
+ * sicher gewinnen statt von der Ladereihenfolge abzuhängen. */
+:root.ion-palette-dark.ios,
+:root.ion-palette-dark.md {
+  --ion-background-color: #15161a;
+  --ion-background-color-rgb: 21, 22, 26;
+  --ion-text-color: #ededed;
+  --ion-text-color-rgb: 237, 237, 237;
+
+  --ion-card-background: #1d1e23;
+  --ion-toolbar-background: #15161a;
+  --ion-item-background: #1d1e23;
+  --ion-tab-bar-background: #15161a;
+
+  --ion-color-danger: #c0392b;
+  --ion-color-danger-rgb: 192, 57, 43;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #a93226;
+  --ion-color-danger-tint: #c9574b;
+  --ion-color-danger-badge-text: #e6928a;
+
+  --ion-color-medium: #9a9a9a;
+  --ion-color-medium-rgb: 154, 154, 154;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #878787;
+  --ion-color-medium-tint: #a8a8a8;
+
+  --text-muted: #6b6b6b;
+  --text-secondary: #9a9a9a;
+  --border: #2c2d33;
+
+  --card-background: #1d1e23;
+  --surface-2: #1d1e23;
+}

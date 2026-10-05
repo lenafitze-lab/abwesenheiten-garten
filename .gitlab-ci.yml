@@ -1,0 +1,12 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+
+stages:
+  - test
+  - build
+  - deploy
+
+include: 
+  - '/projekt/.gitlab-ci.yml'

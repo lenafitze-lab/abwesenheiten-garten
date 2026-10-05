@@ -1,0 +1,173 @@
+.auth-content {
+  --background: linear-gradient(
+    180deg,
+    rgba(var(--ion-color-primary-rgb), var(--auth-tint-opacity, 0.14)) 0%,
+    var(--ion-background-color, #ffffff) 280px
+  );
+  // "+ var(--ion-safe-area-left/right)" statt fixer 20px: im Querformat
+  // sitzt links/rechts sonst der Kerbe-/Home-Indicator-Bereich des iPhones
+  // direkt am Formularrand.
+  --padding-start: calc(20px + var(--ion-safe-area-left, 0px));
+  --padding-end: calc(20px + var(--ion-safe-area-right, 0px));
+  --padding-top: 32px;
+  --padding-bottom: 32px;
+}
+
+.auth-badge {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ion-color-primary);
+  box-shadow: 0 6px 16px rgba(var(--ion-color-primary-rgb), 0.28);
+
+  ion-icon {
+    font-size: 30px;
+    color: var(--ion-color-primary-contrast);
+  }
+}
+
+.auth-heading {
+  margin: 0 0 4px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.auth-subheading {
+  margin: 0 0 24px;
+  text-align: center;
+  color: var(--ion-color-medium-shade);
+  font-size: 0.9375rem;
+}
+
+.auth-card {
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+
+  ion-card-content {
+    padding: 24px 20px;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  // Etwas gedämpfter als das Standard-Ionic-Rot, damit ungültige
+  // Felder nicht so alarmierend wirken.
+  ion-input {
+    --highlight-color-invalid: #c05a5a;
+    --border-radius: 14px;
+  }
+}
+
+.auth-error {
+  margin: 0;
+  color: var(--ion-color-danger);
+  font-size: 0.875rem;
+}
+
+.auth-success {
+  margin: 0;
+  color: var(--ion-color-success-shade);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.auth-notice {
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(var(--ion-color-primary-rgb), 0.12);
+  // Gleiches Kontrast-Problem wie bei .typ-label: --ion-color-primary-shade
+  // auf dem eigenen Tint erreicht nicht die geforderten 4.5:1.
+  color: var(--ion-color-primary-badge-text);
+  font-size: 0.875rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.submit-button {
+  margin-top: 8px;
+  --border-radius: 12px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  height: auto;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.auth-switch {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 0.875rem;
+
+  a {
+    color: var(--ion-color-primary-shade);
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+.test-hint {
+  display: block;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--ion-color-light);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+
+  p {
+    margin: 4px 0 0;
+  }
+}
+
+// Querformat auf Telefonen (nicht Tablets - daher zusätzlich an eine
+// niedrige Höhe gekoppelt): der grosse Badge/Heading-Block oben ist für
+// Hochformat bemessen und schiebt sonst Formular und Speichern-Button
+// unter den sichtbaren Bereich, ohne dass auf den ersten Blick klar wäre,
+// dass überhaupt gescrollt werden muss.
+@media (orientation: landscape) and (max-height: 500px) {
+  ion-toolbar {
+    --min-height: 36px;
+  }
+
+  .auth-content {
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+  }
+
+  // Rein dekorativ - auf der knappen Höhe wichtiger, dass Formular und
+  // Speichern-Button ohne Scrollen erreichbar sind.
+  .auth-badge {
+    display: none;
+  }
+
+  .auth-heading {
+    margin-bottom: 2px;
+    font-size: 1.125rem;
+  }
+
+  .auth-subheading {
+    margin-bottom: 10px;
+  }
+
+  .auth-card ion-card-content {
+    padding: 14px 20px;
+  }
+
+  .auth-form {
+    gap: 8px;
+  }
+
+  .auth-switch {
+    margin-top: 8px;
+  }
+}

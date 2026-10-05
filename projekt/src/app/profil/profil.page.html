@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Profil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="appearance.toggleDarkMode()" [attr.aria-label]="appearance.isDark() ? 'Hellmodus aktivieren' : 'Dunkelmodus aktivieren'">
+        <ion-icon slot="icon-only" [name]="appearance.isDark() ? 'sunny' : 'moon'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="profil-content">
+  @if (authService.currentUser(); as user) {
+  <div class="profil-container">
+    <ion-grid class="profil-kopf">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="auto" class="profil-avatar-spalte">
+          <ion-avatar class="profil-avatar">
+            @if (user.avatarDataUrl; as bild) {
+              <img [src]="bild" alt="Profilbild" />
+            } @else {
+              <span>{{ initialen() }}</span>
+            }
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <h1 class="profil-name">{{ anzeigename() }}</h1>
+
+    @if (user.role) {
+      <ion-chip class="profil-rolle">{{ user.role }}</ion-chip>
+    }
+
+    <p class="profil-gruppe">Gruppe: {{ user.group }}</p>
+
+    <ion-button fill="outline" size="small" class="profil-bearbeiten" (click)="bearbeiten()">
+      Bearbeiten
+    </ion-button>
+
+    <p class="section-label">Farbschema</p>
+
+    <ion-grid class="farbschema-grid">
+      <ion-row>
+        @for (option of farbschemaOptionen; track option.wert) {
+          <ion-col size="6">
+            <ion-card
+              button="true"
+              class="farbschema-option"
+              [class.selected]="appearance.farbschema() === option.wert"
+              (click)="appearance.setFarbschema(option.wert)"
+            >
+              <ion-card-content>
+                @if (appearance.farbschema() === option.wert) {
+                  <ion-icon name="checkmark-circle" class="farbschema-check"></ion-icon>
+                }
+                <span class="farbschema-swatch" [style.background]="option.farbe"></span>
+                <p>{{ option.label }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid class="profil-aktionen">
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" fill="outline" class="btn" (click)="abmelden()">Abmelden</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" fill="outline" color="danger" class="btn" (click)="profilLoeschen()">
+            Profil löschen
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <a routerLink="/tabs/profil/ueber-die-app" class="app-version">
+      Mehr über die App
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </a>
+  </div>
+  }
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Profil vervollständigen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="auth-content">
+  <ion-grid class="avatar-picker-grid">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto" class="avatar-picker">
+        <ion-avatar>
+          @if (profilbildVorschau(); as vorschau) {
+            <img [src]="vorschau" alt="Profilbild" />
+          } @else {
+            <ion-icon name="person-circle-outline"></ion-icon>
+          }
+        </ion-avatar>
+        <label class="avatar-upload-button" for="profilbild-input">
+          <ion-icon name="camera-outline"></ion-icon>
+        </label>
+        <input
+          id="profilbild-input"
+          type="file"
+          accept="image/*"
+          hidden
+          (change)="onProfilbildAusgewaehlt($event)"
+        />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <p class="avatar-hint">Profilbild (optional)</p>
+
+  <h1 class="auth-heading">Erzähl uns von dir</h1>
+  <p class="auth-subheading">Damit dich deine Gruppe erkennt.</p>
+
+  <ion-card class="auth-card">
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+        <ion-input
+          label="Vorname"
+          labelPlacement="stacked"
+          fill="outline"
+          autocomplete="given-name"
+          formControlName="vorname"
+          [errorText]="vornameFehler()"
+        ></ion-input>
+
+        <ion-input
+          label="Nachname"
+          labelPlacement="stacked"
+          fill="outline"
+          autocomplete="family-name"
+          formControlName="nachname"
+          [errorText]="nachnameFehler()"
+        ></ion-input>
+
+        @if (fehlermeldung(); as fehler) {
+          <p class="auth-error">{{ fehler }}</p>
+        }
+
+        <ion-button expand="block" type="submit" class="submit-button" [disabled]="form.invalid || wirdGeladen()">
+          Weiter
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

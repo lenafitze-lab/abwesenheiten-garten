@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Abwesenheiten
+    </ion-title>
+    <ion-chip slot="end" class="header-chip">Garten 1</ion-chip>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [value]="segment()" (ionChange)="onSegmentChange($event.detail.value)">
+      <ion-segment-button value="alle">
+        <ion-label>Alle</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="trainings">
+        <ion-label>Trainings</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="anlaesse">
+        <ion-label>Anlässe</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="abgeschlossen">
+        <ion-label>Abgeschlossen</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Abwesenheiten</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @if (ladend()) {
+    <div class="lade-hinweis">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  } @else if (ladeFehler()) {
+    <p class="fehler-hinweis">{{ ladeFehler() }}</p>
+  } @else {
+    @if (ausCache()) {
+      <p class="cache-hinweis">
+        Offline - zeigt den zuletzt geladenen Stand vom {{ cacheZeitpunkt() | date: 'dd.MM.yyyy, HH:mm' }} Uhr.
+      </p>
+    }
+    <div class="termin-list">
+      @for (termin of currentList(); track termin.start + termin.titel) {
+        <app-termin-karte [termin]="termin" (terminGeaendert)="laden()"></app-termin-karte>
+      } @empty {
+        <p class="fehler-hinweis">Keine Einträge.</p>
+      }
+    </div>
+
+    @if (istTrainer()) {
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="terminErstellen()" aria-label="Neuen Termin erstellen">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    }
+  }
+</ion-content>

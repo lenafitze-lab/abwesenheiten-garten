@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Anmeldung</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="auth-content">
+  <ion-avatar class="auth-badge">
+    <ion-icon name="log-in-outline"></ion-icon>
+  </ion-avatar>
+  <h1 class="auth-heading">Willkommen zurück</h1>
+  <p class="auth-subheading">Melde dich an, um fortzufahren.</p>
+
+  @if (sitzungAbgelaufen()) {
+    <p class="auth-notice">Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.</p>
+  }
+
+  <ion-card class="auth-card">
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+        <ion-input
+          label="E-Mail"
+          labelPlacement="stacked"
+          fill="outline"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          formControlName="email"
+          [errorText]="emailFehler()"
+        ></ion-input>
+
+        <div class="passwort-gruppe">
+          <ion-input
+            label="Passwort"
+            labelPlacement="stacked"
+            fill="outline"
+            type="password"
+            autocomplete="current-password"
+            formControlName="passwort"
+            [errorText]="passwortFehler()"
+          ></ion-input>
+
+          <a routerLink="/auth/passwort-vergessen" class="forgot-password-link">Passwort vergessen?</a>
+        </div>
+
+        @if (fehlermeldung(); as fehler) {
+          <p class="auth-error">{{ fehler }}</p>
+        }
+
+        <ion-button expand="block" type="submit" class="submit-button" [disabled]="form.invalid || wirdGeladen()">
+          Anmelden
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <p class="auth-switch">
+    Noch kein Konto?
+    <a routerLink="/auth/registrierung">Registrieren</a>
+  </p>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="kopf-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/profil" text="" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Über die App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ueber-content">
+  <div class="ueber-wrapper">
+    <div class="icon-bereich">
+      <ion-img class="app-icon" src="assets/icon/icon-192x192-v4.png" alt="Icon der Voltige Garten App"></ion-img>
+
+      <h1 class="app-name">Voltige Garten App</h1>
+      <p class="app-beschreibung">Abwesenheiten-App für die Voltigier-Gruppe Garten 1.</p>
+
+      <span class="version-badge">Version {{ appVersion }}</span>
+    </div>
+
+    <div class="info-karte">
+      <div class="info-zeile">
+        <div class="info-icon-badge">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <div class="info-zeile-text">
+          <p class="info-label">Entwickelt von</p>
+          <p class="info-wert">Lena Fitze</p>
+        </div>
+      </div>
+      <div class="info-zeile">
+        <div class="info-icon-badge">
+          <ion-icon name="code-slash-outline"></ion-icon>
+        </div>
+        <div class="info-zeile-text">
+          <p class="info-label">Technologien</p>
+          <p class="info-wert">Ionic &amp; Angular, Supabase</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="copyright">© {{ jahr }} Garten 1</p>
+  </div>
+</ion-content>

@@ -1,0 +1,89 @@
+.header-chip {
+  --background: var(--surface-2);
+  --color: var(--text-secondary);
+  border: 0.5px solid var(--border);
+  font-weight: 600;
+}
+
+ion-segment {
+  --background: transparent;
+  padding: 4px 8px 8px;
+}
+
+ion-segment-button {
+  --background-checked: rgba(var(--ion-color-primary-rgb), 0.35);
+  --color: var(--ion-color-dark, #1e1e1e);
+  --color-checked: var(--ion-color-dark, #1e1e1e);
+  --indicator-color: transparent;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  min-height: 34px;
+  min-width: 0;
+  border-radius: 8px;
+  text-transform: none;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: normal;
+}
+
+ion-segment-button.segment-button-checked {
+  border: 1px solid var(--ion-color-primary);
+}
+
+.lade-hinweis {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+.fehler-hinweis {
+  text-align: center;
+  color: var(--ion-color-medium-shade);
+  padding: 24px 16px;
+}
+
+.cache-hinweis {
+  margin: 12px calc(16px + var(--ion-safe-area-right, 0px)) 0 calc(16px + var(--ion-safe-area-left, 0px));
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(var(--ion-color-warning-rgb, 224, 168, 0), 0.18);
+  color: var(--ion-color-warning-shade, #b58900);
+  font-size: 0.8125rem;
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.termin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  // "+ var(--ion-safe-area-left/right)" statt fixer 16px: im Querformat
+  // sitzt links/rechts sonst der Kerbe-/Home-Indicator-Bereich des iPhones
+  // direkt am Kartenrand.
+  padding: 12px calc(16px + var(--ion-safe-area-right, 0px)) 24px calc(16px + var(--ion-safe-area-left, 0px));
+  // Im Querformat wird der Content-Bereich sehr breit - ohne Begrenzung
+  // würden die Termin-Karten auf voller Bildschirmbreite ausgezogen wirken
+  // statt wie eine kompakte, mittig zentrierte Liste.
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Ab dieser Breite im Querformat lieber zwei Spalten nebeneinander als eine
+// einzelne, sehr breit gezogene Karte pro Zeile - die Karten selbst bleiben
+// dabei unverändert (keine eigene max-width auf app-termin-karte nötig, die
+// Grid-Spalte begrenzt die Breite bereits).
+// "orientation: landscape" allein trifft auch auf jedes breite Laptop-/
+// Desktop-Fenster zu, nicht nur ein Handy im Querformat - deshalb zusätzlich
+// auf echte Touch-Geräte ohne Maus/Trackpad eingeschränkt (hover: none +
+// pointer: coarse), damit die Liste am Laptop einspaltig bleibt.
+@media (orientation: landscape) and (min-width: 700px) and (hover: none) and (pointer: coarse) {
+  .termin-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 960px;
+  }
+}

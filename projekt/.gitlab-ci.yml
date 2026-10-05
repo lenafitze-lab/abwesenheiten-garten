@@ -1,0 +1,52 @@
+variables:
+  CODE_DIR: ./projekt
+  NODE_IMAGE: node:24.15
+
+cache:
+  key:
+    files:
+      - $CODE_DIR/package-lock.json
+  paths:
+    - $CODE_DIR/node_modules/
+
+test_app:
+  stage: test
+  tags:
+    - myrunner
+  allow_failure: false
+  image:
+    name: $NODE_IMAGE
+  script:
+    - echo "Test the Angular app..."
+    - cd $CODE_DIR
+    - npm ci
+    - npm run test
+
+build_app:
+  stage: build
+  tags:
+    - myrunner
+  allow_failure: false
+  image:
+    name: $NODE_IMAGE
+  script:
+    - echo "Building the Angular app..."
+    - cd $CODE_DIR
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - $CODE_DIR/www/*
+
+deploy_app:
+  stage: deploy
+  image: kroniak/ssh-client
+  needs: ["build_app"]
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - scp -o LogLevel=DEBUG -r $CODE_DIR/www/* $USER@$HOST:/srv/uk335/_lf/
+    - ssh $USER@$HOST 'cd /srv/uk335 && chmod 755 _lf && mv lf ~lf && mv _lf lf && rm -r ~lf'

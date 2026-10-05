@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true" class="welcome-content">
+  <div class="welcome-wrapper">
+    <ion-img class="welcome-illustration" src="assets/icon/pferd-bild-garten.avif" alt=""></ion-img>
+
+    <h1 class="welcome-title">Willkommen auf der Voltige Garten App</h1>
+    <p class="welcome-subtitle">Garten 1</p>
+    <p class="welcome-text">
+      In dieser App könnt ihr euch anmelden und eure Absenzen eintragen. Dies sorgt für mehr
+      Übersicht in der Gruppe.
+    </p>
+
+    <div class="welcome-actions">
+      <ion-button expand="block" color="primary" class="btn" (click)="weiterZuRegistrierung()">
+        Registrieren
+      </ion-button>
+      <ion-button expand="block" fill="outline" color="primary" class="btn" (click)="weiterZuAnmeldung()">
+        Anmelden
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

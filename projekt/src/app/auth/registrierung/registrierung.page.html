@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registrierung</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="auth-content">
+  <ion-avatar class="auth-badge">
+    <ion-icon name="person-add-outline"></ion-icon>
+  </ion-avatar>
+  <h1 class="auth-heading">Konto erstellen</h1>
+  <p class="auth-subheading">Tritt deiner Gruppe mit dem Einladungscode bei.</p>
+
+  <ion-card class="auth-card">
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+        <ion-input
+          label="E-Mail"
+          labelPlacement="stacked"
+          fill="outline"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          formControlName="email"
+          [errorText]="emailFehler()"
+        ></ion-input>
+
+        <ion-input
+          label="Passwort"
+          labelPlacement="stacked"
+          fill="outline"
+          type="password"
+          autocomplete="new-password"
+          formControlName="passwort"
+          [errorText]="passwortFehler()"
+        ></ion-input>
+
+        <ion-input
+          label="Passwort bestätigen"
+          labelPlacement="stacked"
+          fill="outline"
+          type="password"
+          autocomplete="new-password"
+          formControlName="passwortBestaetigung"
+          [errorText]="passwortBestaetigungFehler()"
+        ></ion-input>
+
+        <ion-input
+          label="Einladungscode"
+          labelPlacement="stacked"
+          fill="outline"
+          formControlName="einladungscode"
+          [errorText]="einladungscodeFehler()"
+        ></ion-input>
+
+        <ion-button expand="block" type="submit" class="submit-button" [disabled]="form.invalid || form.pending">
+          Registrieren
+        </ion-button>
+      </form>
+
+      <ion-note class="test-hint">
+        Diese Infos werden nur für Testzwecke benötigt.
+        <p>Für Eltern oder ein Volti: Einladungscode <strong>GARTEN1-2026</strong></p>
+        <p>Für Trainer: Einladungscode <strong>GARTEN1-TRAINER</strong></p>
+      </ion-note>
+    </ion-card-content>
+  </ion-card>
+
+  <p class="auth-switch">
+    Bereits ein Konto?
+    <a routerLink="/auth/anmeldung">Anmelden</a>
+  </p>
+</ion-content>

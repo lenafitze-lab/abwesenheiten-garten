@@ -1,0 +1,57 @@
+<div class="kopf">
+  <span class="name">{{ personName }}</span>
+  <ion-button fill="clear" class="schliessen-button" (click)="abbrechen()" aria-label="Abbrechen">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </ion-button>
+</div>
+
+<div class="inhalt">
+  <p class="termin-name">{{ terminLabel }}</p>
+
+  <div class="status-kacheln">
+    <ion-button
+      fill="outline"
+      class="kachel kachel--anwesend"
+      [class.aktiv]="!istAbwesend()"
+      (click)="onStatusWechsel(false)"
+    >
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <span>Anwesend</span>
+    </ion-button>
+    <ion-button
+      fill="outline"
+      class="kachel kachel--abwesend"
+      [class.aktiv]="istAbwesend()"
+      (click)="onStatusWechsel(true)"
+    >
+      <ion-icon name="close-circle-outline"></ion-icon>
+      <span>Abwesend</span>
+    </ion-button>
+  </div>
+
+  @if (istAbwesend()) {
+    <ion-textarea
+      fill="outline"
+      placeholder="Gib deinen Grund ein:"
+      [autoGrow]="true"
+      [ngModel]="grundText()"
+      (ngModelChange)="onGrundChange($event)"
+      [errorText]="grundFehler()"
+      [class.ion-invalid]="!!grundFehler()"
+      [class.ion-touched]="beruehrt()"
+      class="grund-feld"
+    ></ion-textarea>
+
+    <ion-toggle
+      class="privat-toggle"
+      [checked]="privatAktiv()"
+      (ionChange)="privatAktiv.set($event.detail.checked)"
+    >
+      Privat (ist nur für den Trainer sichtbar)
+    </ion-toggle>
+  }
+
+  <ion-button expand="block" class="speichern-button" [disabled]="wirdGespeichert()" (click)="speichern()">
+    Speichern
+  </ion-button>
+</div>

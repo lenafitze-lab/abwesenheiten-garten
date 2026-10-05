@@ -1,0 +1,9 @@
+<ion-app>
+  @if (!offlineService.istOnline()) {
+    <div class="offline-banner">
+      <ion-icon name="cloud-offline-outline"></ion-icon>
+      Keine Internetverbindung
+    </div>
+  }
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>

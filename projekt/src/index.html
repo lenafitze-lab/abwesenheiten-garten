@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <title>Voltige Garten App</title>
+
+  <base href="/"/>
+
+  <meta name="color-scheme" content="light dark"/>
+  <!-- user-scalable=no bzw. maximum-scale < 5 verhindert Pinch-Zoom, was ein
+       Accessibility-Audit zurecht bemängelt: Personen mit Sehbehinderung
+       verlassen sich oft genau darauf, um Inhalte lesbar zu vergrössern. -->
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="msapplication-tap-highlight" content="no"/>
+  <!-- Startwert anhand der System-Einstellung, bevor der AppearanceService
+       geladen hat. Der Service setzt dieses Tag danach aktiv um, sobald die
+       Person den Dark/Light-Modus manuell im Profil umschaltet (siehe
+       appearance.service.ts) - Media-Queries allein reagieren darauf nicht. -->
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#15161a" media="(prefers-color-scheme: dark)"/>
+
+  <link rel="icon" type="image/png" href="assets/icon/icon-192x192-v4.png"/>
+  <link rel="apple-touch-icon" href="assets/icon/icon_192x192-v4.png"/>
+
+  <!-- add to homescreen for ios -->
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <!-- black-translucent: Statusleiste wird transparent, die Seite scheint
+       durch. Icons/Uhrzeit sind dadurch auf iOS IMMER weiss (das lässt sich
+       zur Laufzeit nicht ändern) - deshalb hält global.scss den obersten
+       Streifen (Safe-Area-Inset) bewusst immer dunkel genug für weissen Text,
+       unabhängig vom aktuellen Farbschema. -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Voltige Garten"/>
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+
+<body>
+  <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+.bearbeiten-content {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 24px;
+  --padding-bottom: 24px;
+}
+
+.avatar-picker-grid {
+  padding: 0;
+}
+
+.avatar-picker {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  padding: 0;
+  margin: 0 auto 24px;
+}
+
+ion-avatar {
+  width: 108px;
+  height: 108px;
+  border: 3px solid var(--ion-color-primary);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  ion-icon {
+    width: 100%;
+    height: 100%;
+    color: var(--ion-color-medium);
+  }
+}
+
+.avatar-upload-button {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  border: 2px solid var(--ion-background-color, #ffffff);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  ion-icon {
+    color: var(--ion-color-primary-contrast, #1e1e1e);
+    font-size: 16px;
+  }
+}
+
+.bearbeiten-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 420px;
+  margin: 0 auto;
+
+  ion-input {
+    --border-radius: 14px;
+  }
+}
+
+.submit-button {
+  margin-top: 8px;
+}

@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Neues Passwort</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="auth-content">
+  <ion-avatar class="auth-badge">
+    <ion-icon name="key-outline"></ion-icon>
+  </ion-avatar>
+  <h1 class="auth-heading">Neues Passwort setzen</h1>
+
+  <ion-card class="auth-card">
+    <ion-card-content>
+      @if (tokenWirdGeprueft()) {
+        <div class="lade-hinweis"><ion-spinner name="crescent"></ion-spinner></div>
+      } @else if (!tokenGueltig()) {
+        <p class="auth-error">Dieser Link ist ungültig oder abgelaufen. Bitte fordere einen neuen Link an.</p>
+        <ion-button expand="block" fill="outline" routerLink="/auth/passwort-vergessen" class="submit-button">
+          Neuen Link anfordern
+        </ion-button>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+          <ion-input
+            label="Neues Passwort"
+            labelPlacement="stacked"
+            fill="outline"
+            type="password"
+            autocomplete="new-password"
+            formControlName="neuesPasswort"
+            [errorText]="neuesPasswortFehler()"
+          ></ion-input>
+
+          <ion-input
+            label="Passwort bestätigen"
+            labelPlacement="stacked"
+            fill="outline"
+            type="password"
+            autocomplete="new-password"
+            formControlName="passwortBestaetigung"
+            [errorText]="passwortBestaetigungFehler()"
+          ></ion-input>
+
+          <ion-button expand="block" type="submit" class="submit-button" [disabled]="form.invalid || wirdGeladen()">
+            Passwort speichern
+          </ion-button>
+        </form>
+      }
+    </ion-card-content>
+  </ion-card>
+</ion-content>

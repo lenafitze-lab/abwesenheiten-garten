@@ -1,0 +1,105 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Neuer Termin</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abbrechen()" aria-label="Abbrechen">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="erstellen-content">
+  <form [formGroup]="form" (ngSubmit)="speichern()" class="erstellen-form" novalidate>
+    <ion-segment formControlName="typ">
+      <ion-segment-button value="training">
+        <ion-label>Training</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="anlass">
+        <ion-label>Anlass</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-input
+      label="Titel"
+      labelPlacement="stacked"
+      fill="outline"
+      formControlName="titel"
+      [errorText]="form.controls.titel.touched && form.controls.titel.invalid ? 'Titel ist ein Pflichtfeld.' : undefined"
+    ></ion-input>
+
+    <ion-input
+      label="Datum"
+      labelPlacement="stacked"
+      fill="outline"
+      type="date"
+      formControlName="datum"
+      [errorText]="form.controls.datum.touched && form.controls.datum.invalid ? 'Datum ist ein Pflichtfeld.' : undefined"
+    ></ion-input>
+
+    <ion-input
+      label="Uhrzeit (Start)"
+      labelPlacement="stacked"
+      fill="outline"
+      type="time"
+      formControlName="startZeit"
+      [errorText]="form.controls.startZeit.touched && form.controls.startZeit.invalid ? 'Startzeit ist ein Pflichtfeld.' : undefined"
+    ></ion-input>
+
+    <ion-input
+      label="Uhrzeit (Ende)"
+      labelPlacement="stacked"
+      fill="outline"
+      type="time"
+      formControlName="endZeit"
+      [errorText]="endZeitFehler()"
+    ></ion-input>
+
+    @if (form.controls.typ.value === 'anlass') {
+      <ion-input
+        label="Enddatum (optional, bei mehrtägigen Anlässen)"
+        labelPlacement="stacked"
+        fill="outline"
+        type="date"
+        formControlName="endDatum"
+        [errorText]="endDatumFehler()"
+      ></ion-input>
+    }
+
+    <ion-textarea
+      label="Bemerkung (optional)"
+      labelPlacement="stacked"
+      fill="outline"
+      placeholder="z.B. Hallenwechsel oder Hinweis für alle"
+      [autoGrow]="true"
+      formControlName="bemerkung"
+      class="bemerkung-feld"
+    ></ion-textarea>
+
+    <ion-toggle formControlName="istDauerauftrag" class="dauerauftrag-toggle">
+      Dauerauftrag
+    </ion-toggle>
+
+    @if (form.controls.istDauerauftrag.value) {
+      @if (wochentag(); as tag) {
+        <ion-note class="wochentag-hinweis">Wiederholt sich wöchentlich, jeden {{ tag }}.</ion-note>
+      }
+
+      <ion-input
+        label="Verfalldatum (optional)"
+        labelPlacement="stacked"
+        fill="outline"
+        type="date"
+        formControlName="verfalldatum"
+        [errorText]="verfalldatumFehler()"
+      ></ion-input>
+    }
+
+    <ion-button expand="block" type="submit" class="btn submit-button" [disabled]="form.invalid || wirdGespeichert()">
+      Speichern
+    </ion-button>
+    <ion-button expand="block" fill="outline" type="button" class="btn" (click)="abbrechen()">
+      Abbrechen
+    </ion-button>
+  </form>
+</ion-content>

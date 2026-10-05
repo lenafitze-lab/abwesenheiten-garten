@@ -1,0 +1,44 @@
+.bearbeiten-content {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 20px;
+  --padding-bottom: 24px;
+}
+
+.modus-hinweis {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.bearbeiten-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 420px;
+  margin: 0 auto;
+
+  ion-input,
+  ion-textarea {
+    --border-radius: 14px;
+  }
+}
+
+.submit-button {
+  margin-top: 8px;
+}
+
+// Deutlicher Abstand zur destruktiven Button-Gruppe, damit sie klar als
+// eigene, gefährlichere Gruppe wahrgenommen wird statt wie eine
+// Fortsetzung von Speichern/Abbrechen.
+.gefahrenzone {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.absagen-button {
+  --border-width: 1px;
+}

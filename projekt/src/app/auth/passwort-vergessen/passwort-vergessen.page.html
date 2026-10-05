@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Passwort vergessen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="auth-content">
+  <ion-avatar class="auth-badge">
+    <ion-icon name="mail-outline"></ion-icon>
+  </ion-avatar>
+  <h1 class="auth-heading">Passwort vergessen?</h1>
+  <p class="auth-subheading">Wir schicken dir einen Link zum Zurücksetzen.</p>
+
+  <ion-card class="auth-card">
+    <ion-card-content>
+      @if (linkGesendet()) {
+        <p class="auth-success">
+          Falls ein Account mit dieser E-Mail-Adresse existiert, wurde ein Link zum Zurücksetzen des Passworts
+          verschickt. Bitte prüfe dein Postfach.
+        </p>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+          <ion-input
+            label="E-Mail"
+            labelPlacement="stacked"
+            fill="outline"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            formControlName="email"
+            [errorText]="emailFehler()"
+          ></ion-input>
+
+          <ion-button expand="block" type="submit" class="submit-button" [disabled]="form.invalid || wirdGeladen()">
+            Link senden
+          </ion-button>
+        </form>
+      }
+    </ion-card-content>
+  </ion-card>
+
+  <p class="auth-switch">
+    <a routerLink="/auth/anmeldung">Zurück zur Anmeldung</a>
+  </p>
+</ion-content>

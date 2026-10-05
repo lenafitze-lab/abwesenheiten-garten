@@ -1,0 +1,23 @@
+// Passwort-Feld und "Passwort vergessen?"-Link als eigene, enger gruppierte
+// Einheit statt sie über den 16px-Formular-gap treiben zu lassen - dafür
+// KEIN negativer margin-top auf den Link: der überlappte damit ins
+// Klickfeld des ion-input darüber (Shadow-DOM fängt den Klick ab, bevor er
+// den Link erreicht) und machte "Passwort vergessen?" faktisch unklickbar.
+.passwort-gruppe {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.forgot-password-link {
+  align-self: flex-end;
+  color: var(--ion-color-medium-shade);
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+// Etwas knapper als der normale Formular-gap, damit die Fehlermeldung
+// direkt unter dem Passwort-Bereich wirkt statt weit abgesetzt zu sein.
+.auth-error {
+  margin-top: -8px;
+}

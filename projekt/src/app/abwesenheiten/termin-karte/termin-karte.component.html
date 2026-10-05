@@ -1,0 +1,155 @@
+<div class="karte" [class.nicht-anklickbar]="!termin.id" [class.abgesagt-karte]="termin.abgesagt">
+  <div class="kopf">
+    <div class="kopf-zeile">
+      <span class="typ-label">{{ termin.typLabel }}</span>
+      @if (termin.abgesagt) {
+        <span class="abgesagt-label">Abgesagt</span>
+      }
+      <div class="kopf-rechts">
+        <span class="gruppe-label">Garten 1</span>
+        @if (termin.bemerkung) {
+          <ion-button
+            fill="clear"
+            class="info-button"
+            [class.offen]="bemerkungOffen()"
+            [attr.aria-expanded]="bemerkungOffen()"
+            [attr.aria-label]="bemerkungOffen() ? 'Bemerkung ausblenden' : 'Bemerkung anzeigen'"
+            (click)="bemerkungOffen.set(!bemerkungOffen())"
+          >
+            <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+          </ion-button>
+        }
+      </div>
+    </div>
+    @if (termin.zeigeTitel) {
+      <h2 class="titel" [class.durchgestrichen]="termin.abgesagt">{{ termin.titel }}</h2>
+    }
+    @if (termin.tage) {
+      <p class="datum" [class.durchgestrichen]="termin.abgesagt">{{ termin.start | date: 'dd.MM.yyyy' }} – {{ termin.ende | date: 'dd.MM.yyyy' }}</p>
+    } @else {
+      <div class="datum-zeile">
+        <div>
+          <p class="datum" [class.durchgestrichen]="termin.abgesagt">{{ termin.start | date: 'EEEE, dd.MM.yyyy' }}</p>
+          <p class="uhrzeit" [class.durchgestrichen]="termin.abgesagt">
+            {{ termin.start | date: 'HH:mm' }}
+            @if (termin.ende) {
+              – {{ termin.ende | date: 'HH:mm' }}
+            }
+            Uhr
+            @if (!termin.id) {
+              · wiederkehrend
+            }
+          </p>
+        </div>
+        @if (termin.id && kannTerminBearbeiten()) {
+          <ion-button fill="clear" class="edit-termin-button" aria-label="Termin bearbeiten" (click)="terminBearbeiten()">
+            <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+          </ion-button>
+        }
+      </div>
+    }
+    @if (bemerkungOffen() && termin.bemerkung) {
+      <div class="bemerkung-box">
+        <p class="bemerkung-text">{{ termin.bemerkung }}</p>
+      </div>
+    }
+  </div>
+
+  @if (termin.id && !termin.tage) {
+    <ng-container [ngTemplateOutlet]="eventBlock" [ngTemplateOutletContext]="{ eventId: termin.id }"></ng-container>
+  }
+
+  @if (termin.tage) {
+    @for (tag of termin.tage; track tag.eventId) {
+      <div class="tag-gruppe">
+        <div class="tag-kopf">
+          <p class="tag-titel" [class.durchgestrichen]="tag.abgesagt">
+            {{ tag.label }}:
+            @if (tag.abgesagt) {
+              <span class="abgesagt-label">Abgesagt</span>
+            }
+          </p>
+          @if (kannTerminBearbeiten()) {
+            <ion-button fill="clear" class="edit-termin-button" aria-label="Tag bearbeiten" (click)="tagBearbeiten(tag)">
+              <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+            </ion-button>
+          }
+        </div>
+        <ng-container [ngTemplateOutlet]="eventBlock" [ngTemplateOutletContext]="{ eventId: tag.eventId }"></ng-container>
+      </div>
+    }
+  }
+</div>
+
+<ng-template #eventBlock let-eventId="eventId">
+  @if (ladendFuer(eventId)) {
+    <div class="lade-hinweis"><ion-spinner name="crescent"></ion-spinner></div>
+  } @else if (fehlerFuer(eventId)) {
+    <p class="fehler-hinweis">{{ fehlerFuer(eventId) }}</p>
+  } @else {
+    <div class="status-zeile">
+      <span class="status-eintrag">
+        <span class="punkt anwesend"></span>
+        {{ zaehlerFuer(eventId).anwesend }} anwesend
+      </span>
+      <span class="status-eintrag">
+        <span class="punkt abwesend"></span>
+        {{ zaehlerFuer(eventId).abwesend }} abwesend
+      </span>
+    </div>
+
+    <div class="abschnitt">
+      <ion-button
+        fill="clear"
+        expand="block"
+        class="abschnitt-header"
+        [class.offen]="istAnwesendOffen(eventId)"
+        (click)="toggleAnwesend(eventId)"
+      >
+        Anwesend
+        <ion-icon slot="end" name="chevron-down-outline" class="chevron"></ion-icon>
+      </ion-button>
+      @if (istAnwesendOffen(eventId)) {
+        <div class="namen-liste">
+          @for (person of anwesendFuer(eventId); track person.profileId) {
+            <div class="namen-zeile" [class.bearbeitbar]="kannBearbeiten(person)" (click)="personAnklicken(eventId, person)">
+              <span class="name">{{ person.vorname }} {{ person.nachname }}</span>
+              @if (kannBearbeiten(person)) {
+                <ion-icon name="create-outline" class="edit-icon"></ion-icon>
+              }
+            </div>
+          } @empty {
+            <p class="leer-hinweis">Niemand anwesend gemeldet.</p>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="abschnitt abschnitt--abwesend">
+      <ion-button
+        fill="clear"
+        expand="block"
+        class="abschnitt-header"
+        [class.offen]="istAbwesendOffen(eventId)"
+        (click)="toggleAbwesend(eventId)"
+      >
+        Abwesend
+        <ion-icon slot="end" name="chevron-down-outline" class="chevron"></ion-icon>
+      </ion-button>
+      @if (istAbwesendOffen(eventId)) {
+        <div class="namen-liste">
+          @for (person of abwesendFuer(eventId); track person.profileId) {
+            <div class="namen-zeile" [class.bearbeitbar]="kannBearbeiten(person)" (click)="personAnklicken(eventId, person)">
+              <span class="name">{{ person.vorname }} {{ person.nachname }} <span class="grund">· {{ grundFuerAnzeige(person) }}</span></span>
+              @if (kannBearbeiten(person)) {
+                <ion-icon name="create-outline" class="edit-icon"></ion-icon>
+              }
+            </div>
+          } @empty {
+            <p class="leer-hinweis">Niemand ist abwesend.</p>
+          }
+        </div>
+      }
+    </div>
+  }
+</ng-template>

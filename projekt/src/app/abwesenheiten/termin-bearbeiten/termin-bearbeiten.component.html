@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Termin anpassen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abbrechen()" aria-label="Abbrechen">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bearbeiten-content">
+  <ion-note class="modus-hinweis">
+    @if (modus === 'serie') {
+      Diese Änderung gilt für alle zukünftigen Termine dieser Serie. Bereits vergangene Termine bleiben unverändert.
+    } @else {
+      Diese Änderung gilt nur für diesen einen Termin.
+    }
+  </ion-note>
+
+  <form [formGroup]="form" (ngSubmit)="speichern()" class="bearbeiten-form" novalidate>
+    <ion-input
+      label="Titel"
+      labelPlacement="stacked"
+      fill="outline"
+      formControlName="titel"
+      [errorText]="form.controls.titel.touched && form.controls.titel.invalid ? 'Titel ist ein Pflichtfeld.' : undefined"
+    ></ion-input>
+
+    @if (modus === 'einzeln') {
+      <ion-input
+        label="Datum"
+        labelPlacement="stacked"
+        fill="outline"
+        type="date"
+        formControlName="datum"
+        [errorText]="form.controls.datum.touched && form.controls.datum.invalid ? 'Datum ist ein Pflichtfeld.' : undefined"
+      ></ion-input>
+    }
+
+    <ion-input
+      label="Uhrzeit (Start)"
+      labelPlacement="stacked"
+      fill="outline"
+      type="time"
+      formControlName="startZeit"
+      [errorText]="form.controls.startZeit.touched && form.controls.startZeit.invalid ? 'Startzeit ist ein Pflichtfeld.' : undefined"
+    ></ion-input>
+
+    <ion-input
+      label="Uhrzeit (Ende)"
+      labelPlacement="stacked"
+      fill="outline"
+      type="time"
+      formControlName="endZeit"
+      [errorText]="endZeitFehler()"
+    ></ion-input>
+
+    <ion-textarea
+      label="Bemerkung (optional)"
+      labelPlacement="stacked"
+      fill="outline"
+      [autoGrow]="true"
+      formControlName="bemerkung"
+      class="bemerkung-feld"
+    ></ion-textarea>
+
+    <ion-button expand="block" type="submit" class="btn submit-button" [disabled]="form.invalid || wirdGespeichert()">
+      Speichern
+    </ion-button>
+    <ion-button expand="block" fill="outline" type="button" class="btn" (click)="abbrechen()">
+      Abbrechen
+    </ion-button>
+
+    @if (istTrainer()) {
+      <div class="gefahrenzone">
+        @if (!abgesagt) {
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="danger"
+            type="button"
+            class="btn absagen-button"
+            (click)="absagen()"
+          >
+            {{ typLabel }} absagen
+          </ion-button>
+        }
+        <ion-button
+          expand="block"
+          fill="solid"
+          color="danger"
+          type="button"
+          class="btn loeschen-button"
+          (click)="loeschen()"
+        >
+          {{ typLabel }} löschen
+        </ion-button>
+      </div>
+    }
+  </form>
+</ion-content>

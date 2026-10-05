@@ -1,0 +1,177 @@
+.profil-content {
+  --background: linear-gradient(
+    180deg,
+    rgba(var(--ion-color-primary-rgb), var(--auth-tint-opacity, 0.14)) 0%,
+    var(--ion-background-color, #ffffff) 240px
+  );
+  // "+ var(--ion-safe-area-left/right)" statt fixer 20px: im Querformat
+  // sitzt links/rechts sonst der Kerbe-/Home-Indicator-Bereich des iPhones
+  // direkt am Seitenrand.
+  --padding-start: calc(20px + var(--ion-safe-area-left, 0px));
+  --padding-end: calc(20px + var(--ion-safe-area-right, 0px));
+  --padding-top: 20px;
+  --padding-bottom: 24px;
+  text-align: center;
+}
+
+// Im Querformat wird der Content-Bereich sehr breit - ohne Begrenzung
+// würden Avatar, Grids und Buttons auf voller Bildschirmbreite ausgezogen
+// wirken statt wie eine kompakte, mittig zentrierte Spalte.
+.profil-container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.profil-kopf {
+  padding: 0;
+}
+
+.profil-avatar-spalte {
+  padding: 0;
+}
+
+.profil-avatar {
+  width: 104px;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--ion-color-primary);
+  background: var(--ion-color-light);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  span {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ion-color-primary-shade);
+  }
+}
+
+.profil-name {
+  margin: 16px 0 10px;
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.profil-rolle {
+  margin: 0 auto 10px;
+  --background: rgba(var(--ion-color-primary-rgb), 0.16);
+  // --ion-color-primary-shade auf dem eigenen Tint erreicht nicht die
+  // geforderten 4.5:1 (gleiches Muster wie .typ-label) -
+  // --ion-color-primary-badge-text behält den Akzent-Look bei, ist aber
+  // pro Farbschema/Modus auf ausreichenden Kontrast berechnet.
+  --color: var(--ion-color-primary-badge-text);
+  font-weight: 600;
+}
+
+.profil-gruppe {
+  margin: 0 0 16px;
+  color: var(--ion-color-medium-shade);
+  font-size: 0.9375rem;
+}
+
+.profil-bearbeiten {
+  margin-bottom: 28px;
+  --border-radius: 12px;
+}
+
+.section-label {
+  margin: 0 0 12px;
+  text-align: left;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ion-color-medium-shade);
+}
+
+.farbschema-grid {
+  padding: 0;
+  margin-bottom: 28px;
+}
+
+.farbschema-option {
+  margin: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+  &.selected {
+    border-color: var(--ion-color-primary);
+  }
+
+  ion-card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 8px;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+}
+
+.farbschema-swatch {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.farbschema-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 18px;
+  color: var(--ion-color-primary);
+}
+
+.profil-aktionen {
+  padding: 20px 0 0;
+  // War zuvor var(--ion-color-step-150, var(--ion-border-color, #dedede)) -
+  // beide Fallback-Variablen sind nirgends definiert, wodurch die Linie im
+  // Dark Mode fälschlich hell blieb. var(--border) ist bereits korrekt
+  // für beide Modi gepflegt.
+  border-top: 1px solid var(--border);
+}
+
+.app-version {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 24px 0 0;
+  color: var(--ion-color-medium);
+  font-size: 0.75rem;
+  text-decoration: none;
+
+  ion-icon {
+    font-size: 12px;
+  }
+}
+
+// Querformat auf Telefonen: kleinerer Avatar/Kopfbereich, damit mehr vom
+// eigentlichen Seiteninhalt ohne Scrollen sichtbar ist (die Tab-Leiste
+// beansprucht in dieser Höhe bereits einen spürbaren Anteil).
+@media (orientation: landscape) and (max-height: 500px) {
+  .profil-avatar {
+    width: 72px;
+    height: 72px;
+
+    span {
+      font-size: 1.25rem;
+    }
+  }
+
+  .profil-name {
+    margin: 12px 0 8px;
+  }
+
+  .profil-bearbeiten {
+    margin-bottom: 18px;
+  }
+}

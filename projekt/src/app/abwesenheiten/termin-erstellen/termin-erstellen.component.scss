@@ -1,0 +1,33 @@
+.erstellen-content {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 20px;
+  --padding-bottom: 24px;
+}
+
+.erstellen-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 420px;
+  margin: 0 auto;
+
+  ion-input,
+  ion-textarea {
+    --border-radius: 14px;
+  }
+}
+
+.dauerauftrag-toggle {
+  font-weight: 600;
+}
+
+.wochentag-hinweis {
+  display: block;
+  margin-top: -8px;
+  font-size: 0.8125rem;
+}
+
+.submit-button {
+  margin-top: 8px;
+}

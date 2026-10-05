@@ -1,0 +1,8 @@
+<ion-content [fullscreen]="true" class="fehler-content">
+  <div class="fehler-wrapper">
+    <ion-icon [name]="inhalt().icon" class="fehler-icon"></ion-icon>
+    <h1 class="fehler-titel">{{ inhalt().titel }}</h1>
+    <p class="fehler-text">{{ inhalt().meldung }}</p>
+    <ion-button expand="block" class="btn" (click)="aktion()">{{ inhalt().aktionsText }}</ion-button>
+  </div>
+</ion-content>

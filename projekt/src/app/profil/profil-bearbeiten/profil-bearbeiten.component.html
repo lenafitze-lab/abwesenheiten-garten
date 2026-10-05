@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Profil bearbeiten</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abbrechen()" aria-label="Abbrechen">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bearbeiten-content">
+  <ion-grid class="avatar-picker-grid">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto" class="avatar-picker">
+        <ion-avatar>
+          @if (bildVorschau(); as vorschau) {
+            <img [src]="vorschau" alt="Profilbild" />
+          } @else {
+            <ion-icon name="person-circle-outline"></ion-icon>
+          }
+        </ion-avatar>
+        <label class="avatar-upload-button" for="bearbeiten-bild-input">
+          <ion-icon name="camera-outline"></ion-icon>
+        </label>
+        <input
+          id="bearbeiten-bild-input"
+          type="file"
+          accept="image/*"
+          hidden
+          (change)="onBildAusgewaehlt($event)"
+        />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form [formGroup]="form" (ngSubmit)="speichern()" class="bearbeiten-form" novalidate>
+    <ion-input
+      label="Vorname"
+      labelPlacement="stacked"
+      fill="outline"
+      autocomplete="given-name"
+      formControlName="vorname"
+      [errorText]="vornameFehler()"
+    ></ion-input>
+
+    <ion-input
+      label="Nachname"
+      labelPlacement="stacked"
+      fill="outline"
+      autocomplete="family-name"
+      formControlName="nachname"
+      [errorText]="nachnameFehler()"
+    ></ion-input>
+
+    <ion-button expand="block" type="submit" class="btn submit-button" [disabled]="form.invalid || wirdGespeichert()">
+      Speichern
+    </ion-button>
+    <ion-button expand="block" fill="outline" type="button" class="btn" (click)="abbrechen()">
+      Abbrechen
+    </ion-button>
+  </form>
+</ion-content>

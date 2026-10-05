@@ -1,0 +1,97 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import '@ionic/angular/css/palettes/dark.class.css';
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/*
+ * Absenz-Dialog: kompakte, zentrierte Karte statt Vollbild-Sheet. Muss
+ * global stehen, da der Modal-Host (ion-modal) ausserhalb des per
+ * ViewEncapsulation gescopten Component-Templates liegt.
+ */
+.absenz-toggle-modal {
+  --width: 340px;
+  --height: auto;
+  --border-radius: 18px;
+  --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  .ion-page {
+    position: relative;
+    display: block;
+    contain: content;
+  }
+}
+
+/*
+ * Einheitliche Geometrie für alle "richtigen" Aktions-Buttons (Speichern,
+ * Abbrechen, Absagen, Löschen, ...) - Farbe/Füllung (fill/color-Attribute
+ * auf ion-button) bleibt Sache des jeweiligen Templates und trägt die
+ * Hierarchie (primär gefüllt / sekundär outline / destruktiv rot). Gilt
+ * bewusst NICHT für reine Icon-Buttons (z.B. Schliessen-X, Stift-Icons) -
+ * die haben eine eigene, kompakte runde Form.
+ */
+.btn {
+  --border-radius: 12px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  height: auto;
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/*
+ * Als installierte iOS-PWA ist die Statusleiste mit
+ * "apple-mobile-web-app-status-bar-style: black-translucent" transparent -
+ * Uhrzeit/Akku-Icons sind dadurch immer WEISS und lassen sich zur Laufzeit
+ * nicht umfärben. Im Light Mode wäre Weiss auf dem hellen Seitenhintergrund
+ * kaum lesbar, deshalb bleibt genau der Streifen hinter der Statusleiste
+ * (Safe-Area-Inset oben) unabhängig vom aktuellen Farbschema immer dunkel
+ * genug. Auf Geräten ohne Einkerbung/Safe-Area (z.B. Desktop) ist die Höhe
+ * 0 und die Regel hat keinen sichtbaren Effekt.
+ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ion-safe-area-top, env(safe-area-inset-top));
+  background: #15161a;
+  z-index: 9999;
+  pointer-events: none;
+}

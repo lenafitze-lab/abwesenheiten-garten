@@ -1,0 +1,75 @@
+.avatar-picker-grid {
+  padding: 0;
+}
+
+.avatar-picker {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+ion-avatar {
+  width: 108px;
+  height: 108px;
+  border: 3px solid var(--ion-color-primary);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  ion-icon {
+    width: 100%;
+    height: 100%;
+    color: var(--ion-color-medium);
+  }
+}
+
+.avatar-upload-button {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  border: 2px solid var(--ion-background-color, #ffffff);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  ion-icon {
+    color: var(--ion-color-primary-contrast, #1e1e1e);
+    font-size: 16px;
+  }
+}
+
+.avatar-hint {
+  margin: 0 0 20px;
+  text-align: center;
+  color: var(--ion-color-medium);
+  font-size: 0.8125rem;
+}
+
+// Querformat auf Telefonen: kleinerer Avatar, damit Formular und
+// Speichern-Button ohne Scrollen erreichbar bleiben.
+@media (orientation: landscape) and (max-height: 500px) {
+  .avatar-picker,
+  ion-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .avatar-upload-button {
+    width: 26px;
+    height: 26px;
+
+    ion-icon {
+      font-size: 13px;
+    }
+  }
+
+  .avatar-hint {
+    margin-bottom: 10px;
+  }
+}
