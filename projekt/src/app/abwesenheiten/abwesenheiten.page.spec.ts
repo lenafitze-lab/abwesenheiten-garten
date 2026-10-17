@@ -4,6 +4,7 @@ import { provideIonicAngular } from '@ionic/angular';
 
 import { AbwesenheitenPage } from './abwesenheiten.page';
 import { AuthService, AuthUser } from '../services/auth.service';
+import { GRUPPEN_NAME } from '../shared/gruppe';
 
 function baueTestbed(user: AuthUser | null): void {
   TestBed.configureTestingModule({
@@ -22,7 +23,7 @@ function baueTestUser(role: AuthUser['role']): AuthUser {
     firstName: 'Test',
     lastName: 'Person',
     avatarDataUrl: null,
-    group: 'Garten 1',
+    group: GRUPPEN_NAME,
   };
 }
 

@@ -12,6 +12,7 @@ import {
 import { addIcons } from 'ionicons';
 import { personOutline, codeSlashOutline } from 'ionicons/icons';
 import { version as appVersion } from '../../../../package.json';
+import { GRUPPEN_NAME } from '../../shared/gruppe';
 
 @Component({
   selector: 'app-ueber-die-app',
@@ -20,6 +21,7 @@ import { version as appVersion } from '../../../../package.json';
   imports: [IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent, IonImg, IonIcon],
 })
 export class UeberDieAppPage {
+  protected readonly gruppenName = GRUPPEN_NAME;
   protected readonly appVersion = appVersion;
   protected readonly jahr = new Date().getFullYear();
 

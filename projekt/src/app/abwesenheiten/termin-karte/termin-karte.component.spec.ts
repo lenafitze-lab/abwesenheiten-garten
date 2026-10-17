@@ -5,6 +5,7 @@ import { provideIonicAngular } from '@ionic/angular';
 import { TerminKarteComponent } from './termin-karte.component';
 import { AbsenzenService, TeilnehmerAbsenz } from '../../services/absenzen.service';
 import { AuthService, AuthUser } from '../../services/auth.service';
+import { GRUPPEN_NAME } from '../../shared/gruppe';
 
 function baueTeilnehmer(): TeilnehmerAbsenz[] {
   return [
@@ -21,7 +22,7 @@ function baueUser(role: AuthUser['role']): AuthUser {
     firstName: 'Test',
     lastName: 'Person',
     avatarDataUrl: null,
-    group: 'Garten 1',
+    group: GRUPPEN_NAME,
   };
 }
 

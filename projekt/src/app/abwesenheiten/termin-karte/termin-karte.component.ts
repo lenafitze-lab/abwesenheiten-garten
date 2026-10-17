@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { AbsenzZaehler, sichtbarerGrund, zaehleAnwesendAbwesend } from '../absenz.utils';
 import { AbsenzToggleComponent } from '../absenz-toggle/absenz-toggle.component';
 import { TerminBearbeitenComponent } from '../termin-bearbeiten/termin-bearbeiten.component';
+import { GRUPPEN_NAME } from '../../shared/gruppe';
 
 export interface TerminKarteTag {
   eventId: string;
@@ -60,6 +61,7 @@ function imSetUmschalten<T>(set: Set<T>, wert: T): Set<T> {
   imports: [DatePipe, NgTemplateOutlet, IonIcon, IonSpinner, IonButton],
 })
 export class TerminKarteComponent implements OnInit, OnDestroy {
+  protected readonly gruppenName = GRUPPEN_NAME;
   @Input({ required: true }) termin!: TerminKarteDaten;
   @Output() readonly terminGeaendert = new EventEmitter<void>();
 

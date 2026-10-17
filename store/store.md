@@ -2,7 +2,7 @@
 
 ## Beschreibung
 
-Die Voltige Garten App ist die zentrale Anlaufstelle für die Gruppe **Garten 1** –
+Die Voltige Garten App ist die zentrale Anlaufstelle für die Gruppe **Garten Sen. 1** –
 für Voltigierer:innen, Eltern und Trainer:innen gleichermassen. Statt Abwesenheiten
 über WhatsApp-Chats zu organisieren, läuft hier alles an einem Ort:
 klar, übersichtlich und immer aktuell.
@@ -37,7 +37,7 @@ schafft hier auf einen Blick Klarheit für die ganze Gruppe. Trainer:innen sehen
   zurücksetzen
 
 ### Für wen ist die App?
-Für alle Mitglieder von Garten 1 – Voltigierer:innen, ihre Eltern und die
+Für alle Mitglieder von Garten Sen. 1 – Voltigierer:innen, ihre Eltern und die
 Trainer:innen. Ein Einladungscode genügt für den Start; die passende Rolle wird
 danach direkt zugewiesen.
 

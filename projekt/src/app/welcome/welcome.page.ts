@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonContent, IonButton, IonImg } from '@ionic/angular';
 import { HAS_SEEN_WELCOME_KEY } from '../guards/welcome.guard';
+import { GRUPPEN_NAME } from '../shared/gruppe';
 
 @Component({
   selector: 'app-welcome',
@@ -10,6 +11,7 @@ import { HAS_SEEN_WELCOME_KEY } from '../guards/welcome.guard';
   imports: [IonContent, IonButton, IonImg],
 })
 export class WelcomePage {
+  protected readonly gruppenName = GRUPPEN_NAME;
   private readonly router = inject(Router);
 
   weiterZuRegistrierung(): void {

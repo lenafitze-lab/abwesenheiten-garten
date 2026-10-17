@@ -1,6 +1,6 @@
 # Voltige Garten App
 
-Eine PWA (Ionic/Angular + Supabase) für die Voltigier-Gruppe **Garten 1** des Vereins Garten: Mitglieder tragen ihre Abwesenheiten für Trainings und Anlässe ein, der Trainer behält den Überblick, und eine gemeinsame Packliste hilft bei der Turniervorbereitung.
+Eine PWA (Ionic/Angular + Supabase) für die Voltigier-Gruppe **Garten Sen. 1** des Vereins Garten: Mitglieder tragen ihre Abwesenheiten für Trainings und Anlässe ein, der Trainer behält den Überblick, und eine gemeinsame Packliste hilft bei der Turniervorbereitung.
 
 ![Übersicht der Voltige Garten App](image.png)
 
@@ -19,7 +19,7 @@ Eine PWA (Ionic/Angular + Supabase) für die Voltigier-Gruppe **Garten 1** des V
 
 ## Über das Projekt
 
-Die App löst ein konkretes Problem der Voltigier-Gruppe Garten 1: Wer kommt zum Training, wer nicht – und warum? Statt WhatsApp-Nachrichten hin und her zu schicken, trägt jede Person ihre An-/Abwesenheit direkt in der App ein. Der Trainer sieht auf einen Blick, wer kommt, und kann Trainings und Anlässe zentral verwalten.
+Die App löst ein konkretes Problem der Voltigier-Gruppe Garten Sen. 1: Wer kommt zum Training, wer nicht – und warum? Statt WhatsApp-Nachrichten hin und her zu schicken, trägt jede Person ihre An-/Abwesenheit direkt in der App ein. Der Trainer sieht auf einen Blick, wer kommt, und kann Trainings und Anlässe zentral verwalten.
 
 Das Projekt ist bewusst nicht nur für eine einmalige Abgabe gedacht, sondern wird über die ursprüngliche Projektfrist hinaus weiterentwickelt.
 

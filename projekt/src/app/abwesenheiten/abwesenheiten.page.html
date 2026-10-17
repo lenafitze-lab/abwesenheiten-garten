@@ -3,7 +3,7 @@
     <ion-title>
       Abwesenheiten
     </ion-title>
-    <ion-chip slot="end" class="header-chip">Garten 1</ion-chip>
+    <ion-chip slot="end" class="header-chip">{{ gruppenName }}</ion-chip>
   </ion-toolbar>
   <ion-toolbar>
     <ion-segment [value]="segment()" (ionChange)="onSegmentChange($event.detail.value)">

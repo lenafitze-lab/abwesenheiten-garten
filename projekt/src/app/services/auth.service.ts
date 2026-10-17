@@ -2,6 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FunctionsHttpError, Session } from '@supabase/supabase-js';
 import { SupabaseService } from './supabase.service';
+import { GRUPPEN_NAME } from '../shared/gruppe';
 
 export type Role = 'Volti' | 'Eltern' | 'Trainer';
 type DbRolle = 'trainer' | 'volti' | 'eltern';
@@ -26,7 +27,6 @@ export interface AuthUser {
 // (z.B. eine "einladungscodes"-Tabelle in Supabase).
 const GROUP_INVITE_CODE = 'GARTEN1-2026';
 const TRAINER_INVITE_CODE = 'GARTEN1-TRAINER';
-const GROUP_NAME = 'Garten 1';
 
 const ROLE_TO_DB: Record<Role, DbRolle> = {
   Trainer: 'trainer',
@@ -159,7 +159,7 @@ export class AuthService {
    */
   async passwortVergessen(email: string): Promise<void> {
     const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/passwort-zuruecksetzen`,
+      redirectTo: new URL('auth/passwort-zuruecksetzen', document.baseURI).href,
     });
     if (error) {
       throw new Error(this.uebersetzeFehler(error.message));
@@ -278,7 +278,7 @@ export class AuthService {
     const { data: gruppe, error: gruppeError } = await this.supabase
       .from('gruppen')
       .select('id')
-      .eq('name', GROUP_NAME)
+      .eq('name', GRUPPEN_NAME)
       .single();
     if (gruppeError || !gruppe) {
       throw new Error('Gruppe konnte nicht gefunden werden.');
@@ -318,7 +318,7 @@ export class AuthService {
       firstName: vorname,
       lastName: nachname,
       avatarDataUrl,
-      group: GROUP_NAME,
+      group: GRUPPEN_NAME,
     });
 
     this._pendingEmail.set(null);
@@ -346,7 +346,7 @@ export class AuthService {
       firstName: data.vorname,
       lastName: data.nachname,
       avatarDataUrl: data.bild,
-      group: GROUP_NAME,
+      group: GRUPPEN_NAME,
     });
   }
 

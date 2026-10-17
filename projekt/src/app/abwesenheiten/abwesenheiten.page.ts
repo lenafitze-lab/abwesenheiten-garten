@@ -21,6 +21,7 @@ import { AbsenzenService, Termin } from '../services/absenzen.service';
 import { AuthService } from '../services/auth.service';
 import { TerminErstellenComponent } from './termin-erstellen/termin-erstellen.component';
 import { TerminKarteComponent, TerminKarteDaten } from './termin-karte/termin-karte.component';
+import { GRUPPEN_NAME } from '../shared/gruppe';
 
 type AbwesenheitenSegment = 'alle' | 'trainings' | 'anlaesse' | 'abgeschlossen';
 
@@ -83,6 +84,7 @@ function speichereTermineCache(termine: Termin[]): void {
   ],
 })
 export class AbwesenheitenPage {
+  protected readonly gruppenName = GRUPPEN_NAME;
   private readonly absenzenService = inject(AbsenzenService);
   private readonly authService = inject(AuthService);
   private readonly modalController = inject(ModalController);

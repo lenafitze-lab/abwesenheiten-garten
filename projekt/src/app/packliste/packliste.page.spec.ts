@@ -5,6 +5,7 @@ import { provideIonicAngular } from '@ionic/angular';
 import { PacklistePage } from './packliste.page';
 import { PacklisteItem, PacklisteService } from '../services/packliste.service';
 import { AuthService, AuthUser } from '../services/auth.service';
+import { GRUPPEN_NAME } from '../shared/gruppe';
 
 function baueItems(): PacklisteItem[] {
   return [
@@ -21,7 +22,7 @@ function baueUser(role: AuthUser['role']): AuthUser {
     firstName: 'Test',
     lastName: 'Person',
     avatarDataUrl: null,
-    group: 'Garten 1',
+    group: GRUPPEN_NAME,
   };
 }
 

@@ -5,6 +5,7 @@ import { provideIonicAngular } from '@ionic/angular';
 import { TerminBearbeitenComponent } from './termin-bearbeiten.component';
 import { AbsenzenService } from '../../services/absenzen.service';
 import { AuthService, AuthUser } from '../../services/auth.service';
+import { GRUPPEN_NAME } from '../../shared/gruppe';
 
 function baueUser(role: AuthUser['role']): AuthUser {
   return {
@@ -14,7 +15,7 @@ function baueUser(role: AuthUser['role']): AuthUser {
     firstName: 'Test',
     lastName: 'Person',
     avatarDataUrl: null,
-    group: 'Garten 1',
+    group: GRUPPEN_NAME,
   };
 }
 
