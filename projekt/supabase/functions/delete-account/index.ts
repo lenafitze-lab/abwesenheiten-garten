@@ -41,24 +41,31 @@ Deno.serve(async (req) => {
 
   const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
 
-  // "Weiches" Löschen statt admin.deleteUser(): Login wird über einen sehr
-  // langen Bann gesperrt (GoTrue kennt kein echtes "für immer", daher ~100
-  // Jahre als De-facto-Permanentsperre), die profiles-Zeile bleibt aber
-  // erhalten und wird nur als gelöscht markiert - so ist sie in Supabase
-  // weiterhin sichtbar/nachvollziehbar statt spurlos zu verschwinden.
-  const { error: banError } = await supabaseAdmin.auth.admin.updateUserById(user.id, {
-    ban_duration: '876000h',
-  });
-  if (banError) {
-    return new Response(banError.message, { status: 400, headers: corsHeaders });
+  // Profilbilder liegen unter "<userId>/avatar.<ext>". Storage-Dateien
+  // hängen nicht per Foreign Key am User, darum vor dem Löschen explizit
+  // entfernen - sonst bleiben sie verwaist im Bucket liegen.
+  const { data: avatarDateien, error: listError } = await supabaseAdmin.storage
+    .from('avatars')
+    .list(user.id);
+  if (listError) {
+    return new Response(listError.message, { status: 400, headers: corsHeaders });
+  }
+  if (avatarDateien.length > 0) {
+    const { error: removeError } = await supabaseAdmin.storage
+      .from('avatars')
+      .remove(avatarDateien.map((datei) => `${user.id}/${datei.name}`));
+    if (removeError) {
+      return new Response(removeError.message, { status: 400, headers: corsHeaders });
+    }
   }
 
-  const { error: profilError } = await supabaseAdmin
-    .from('profiles')
-    .update({ geloescht_am: new Date().toISOString() })
-    .eq('id', user.id);
-  if (profilError) {
-    return new Response(profilError.message, { status: 400, headers: corsHeaders });
+  // Echtes Löschen (kein Soft Delete, kein Bann): die E-Mail ist danach
+  // sofort wieder frei. profiles, kind_profile und eigene abwesenheiten
+  // verschwinden per "on delete cascade" mit; gemeldet_von bzw.
+  // abgehakt_von werden per "on delete set null" geleert (siehe 0009).
+  const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(user.id);
+  if (deleteError) {
+    return new Response(deleteError.message, { status: 400, headers: corsHeaders });
   }
 
   return new Response('OK', { status: 200, headers: corsHeaders });

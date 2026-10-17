@@ -178,11 +178,10 @@ export class AuthService {
   }
 
   /**
-   * "Löscht" den eigenen Account über die "delete-account" Edge Function
-   * (braucht den service_role-Key, der nie im Frontend liegen darf) - in
-   * Wirklichkeit ein weiches Löschen: der Login wird dauerhaft gesperrt und
-   * die profiles-Zeile per "geloescht_am" markiert, aber nicht entfernt, so
-   * dass sie in Supabase weiterhin sichtbar/nachvollziehbar bleibt.
+   * Löscht den eigenen Account endgültig über die "delete-account" Edge
+   * Function (braucht den service_role-Key, der nie im Frontend liegen
+   * darf). Profil, Profilbild und eigene Abwesenheiten verschwinden mit,
+   * die E-Mail ist danach sofort wieder für eine Registrierung frei.
    */
   async deleteAccount(): Promise<void> {
     // Frisch abfragen statt des gecachten currentUser-Signals: so ist
