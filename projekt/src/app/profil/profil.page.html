@@ -38,31 +38,6 @@
       Bearbeiten
     </ion-button>
 
-    <p class="section-label">Farbschema</p>
-
-    <ion-grid class="farbschema-grid">
-      <ion-row>
-        @for (option of farbschemaOptionen; track option.wert) {
-          <ion-col size="6">
-            <ion-card
-              button="true"
-              class="farbschema-option"
-              [class.selected]="appearance.farbschema() === option.wert"
-              (click)="appearance.setFarbschema(option.wert)"
-            >
-              <ion-card-content>
-                @if (appearance.farbschema() === option.wert) {
-                  <ion-icon name="checkmark-circle" class="farbschema-check"></ion-icon>
-                }
-                <span class="farbschema-swatch" [style.background]="option.farbe"></span>
-                <p>{{ option.label }}</p>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        }
-      </ion-row>
-    </ion-grid>
-
     <ion-grid class="profil-aktionen">
       <ion-row>
         <ion-col size="6">

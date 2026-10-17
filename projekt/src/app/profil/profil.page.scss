@@ -59,7 +59,7 @@
   // --ion-color-primary-shade auf dem eigenen Tint erreicht nicht die
   // geforderten 4.5:1 (gleiches Muster wie .typ-label) -
   // --ion-color-primary-badge-text behält den Akzent-Look bei, ist aber
-  // pro Farbschema/Modus auf ausreichenden Kontrast berechnet.
+  // pro Hell-/Dunkelmodus auf ausreichenden Kontrast berechnet.
   --color: var(--ion-color-primary-badge-text);
   font-weight: 600;
 }
@@ -73,62 +73,6 @@
 .profil-bearbeiten {
   margin-bottom: 28px;
   --border-radius: 12px;
-}
-
-.section-label {
-  margin: 0 0 12px;
-  text-align: left;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--ion-color-medium-shade);
-}
-
-.farbschema-grid {
-  padding: 0;
-  margin-bottom: 28px;
-}
-
-.farbschema-option {
-  margin: 0;
-  border-radius: 16px;
-  border: 2px solid transparent;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  transition: border-color 0.15s ease, transform 0.15s ease;
-
-  &.selected {
-    border-color: var(--ion-color-primary);
-  }
-
-  ion-card-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 18px 8px;
-  }
-
-  p {
-    margin: 0;
-    font-weight: 500;
-    font-size: 0.875rem;
-  }
-}
-
-.farbschema-swatch {
-  display: block;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.farbschema-check {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 18px;
-  color: var(--ion-color-primary);
 }
 
 .profil-aktionen {

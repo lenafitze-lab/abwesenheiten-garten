@@ -58,9 +58,9 @@
   background: rgba(var(--ion-color-primary-rgb), 0.15);
   // Volles --ion-color-primary als Text auf seinem eigenen 15%-Tint
   // erreichte laut Accessibility-Audit nicht die geforderten 4.5:1 (v.a.
-  // im Gelb-Schema/Hellmodus nur ~2:1) - --ion-color-primary-badge-text
-  // ist pro Farbschema/Modus separat auf ausreichenden Kontrast berechnet
-  // (siehe appearance.service.ts), statt den Hintergrund abzudunkeln.
+  // im Hellmodus nur ~2:1) - --ion-color-primary-badge-text
+  // ist pro Hell-/Dunkelmodus separat auf ausreichenden Kontrast berechnet
+  // (siehe theme/variables.scss), statt den Hintergrund abzudunkeln.
   color: var(--ion-color-primary-badge-text);
 }
 

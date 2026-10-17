@@ -14,7 +14,7 @@ import { OfflineService } from './services/offline.service';
 })
 export class AppComponent {
   // Injizieren genügt: der Constructor von AppearanceService wendet
-  // Darkmode/Farbschema sofort beim App-Start an.
+  // den Darkmode sofort beim App-Start an.
   private readonly appearance = inject(AppearanceService);
   private swUpdate = inject(SwUpdate);
   protected readonly offlineService = inject(OfflineService);

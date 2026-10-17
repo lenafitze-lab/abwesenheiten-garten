@@ -15,20 +15,12 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonCard,
-  IonCardContent,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { moon, sunny, checkmarkCircle, chevronForwardOutline } from 'ionicons/icons';
+import { moon, sunny, chevronForwardOutline } from 'ionicons/icons';
 import { AuthService } from '../services/auth.service';
-import { AppearanceService, Farbschema } from '../services/appearance.service';
+import { AppearanceService } from '../services/appearance.service';
 import { ProfilBearbeitenComponent } from './profil-bearbeiten/profil-bearbeiten.component';
-
-interface FarbschemaOption {
-  wert: Farbschema;
-  label: string;
-  farbe: string;
-}
 
 @Component({
   selector: 'app-profil',
@@ -48,8 +40,6 @@ interface FarbschemaOption {
     IonGrid,
     IonRow,
     IonCol,
-    IonCard,
-    IonCardContent,
   ],
 })
 export class ProfilPage {
@@ -58,11 +48,6 @@ export class ProfilPage {
   private readonly modalController = inject(ModalController);
   protected readonly authService = inject(AuthService);
   protected readonly appearance = inject(AppearanceService);
-
-  protected readonly farbschemaOptionen: FarbschemaOption[] = [
-    { wert: 'Gelb', label: 'Gelb', farbe: '#d1a03a' },
-    { wert: 'Rot', label: 'Rot', farbe: '#c05a5a' },
-  ];
 
   protected readonly anzeigename = computed(() => {
     const user = this.authService.currentUser();
@@ -83,7 +68,7 @@ export class ProfilPage {
   });
 
   constructor() {
-    addIcons({ moon, sunny, checkmarkCircle, chevronForwardOutline });
+    addIcons({ moon, sunny, chevronForwardOutline });
   }
 
   async bearbeiten(): Promise<void> {

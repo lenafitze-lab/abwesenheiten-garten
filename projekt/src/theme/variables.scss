@@ -11,10 +11,15 @@
   --ion-color-primary-shade: #b88d33;
   --ion-color-primary-tint: #d6a94e;
 
-  /* Warnung/destruktive Aktionen: bewusst unabhängig vom Farbschema
-   * (Gelb/Rot) immer dasselbe Rot, damit eine Warnung nie mit der
-   * normalen Akzentfarbe verwechselt werden kann - auch nicht, wenn
-   * jemand "Rot" als Farbschema gewählt hat. */
+  /* Textfarbe für Badges mit halbtransparentem Akzent-Hintergrund
+   * (rgba(--ion-color-primary-rgb, 0.15), z.B. .typ-label "ANLASS"). Die
+   * volle Akzentfarbe als Text auf ihrem eigenen 15%-Tint erreicht laut
+   * Accessibility-Audit nur ~2:1 - deshalb ein deutlich dunklerer Ocker
+   * derselben Farbfamilie statt eines abgedunkelten Hintergrunds. */
+  --ion-color-primary-badge-text: #5b4212;
+
+  /* Warnung/destruktive Aktionen: bewusst ein eigenes Rot, damit eine
+   * Warnung nie mit der normalen Akzentfarbe verwechselt werden kann. */
   --ion-color-danger: #c0392b;
   --ion-color-danger-rgb: 192, 57, 43;
   --ion-color-danger-contrast: #ffffff;
@@ -74,6 +79,18 @@
   --ion-toolbar-background: #15161a;
   --ion-item-background: #1d1e23;
   --ion-tab-bar-background: #15161a;
+
+  /* Entsättigtes Gelb statt des Hellmodus-Tons - auf dunklem Grund
+   * "leuchtet" das helle Gelb sonst unangenehm. Muss hier stehen, weil
+   * Ionics dark.class.css --ion-color-primary sonst auf Blau setzt. Als
+   * Badge-Text reicht im Dark Mode bereits der Akzentton (~6.3:1). */
+  --ion-color-primary: #e0b34c;
+  --ion-color-primary-rgb: 224, 179, 76;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #c59e43;
+  --ion-color-primary-tint: #e3bb5e;
+  --ion-color-primary-badge-text: #e0b34c;
 
   --ion-color-danger: #c0392b;
   --ion-color-danger-rgb: 192, 57, 43;
