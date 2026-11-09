@@ -8,7 +8,7 @@ export const environment = {
   supabaseKey: 'sb_publishable_kiKlOtlW8a68r5NzWO05og_0jZ4Cant',
   // Öffentlicher VAPID-Key für Web Push (npx web-push generate-vapid-keys).
   // Der private Key gehört NUR als Secret zu Supabase, nie hierher.
-  vapidPublicKey: ''
+  vapidPublicKey: 'BEpuzJMIteq-ELw8Gm_H8v1dcU6JydgSRrxynCiTrUVS-37hVwrfj3PLff5RjD8Mvn51DdfU3rYGt8mkZnOFcrc'
 };
 
 /*
