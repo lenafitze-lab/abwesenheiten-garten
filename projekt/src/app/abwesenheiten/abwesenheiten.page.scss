@@ -87,3 +87,15 @@ ion-segment-button.segment-button-checked {
     max-width: 960px;
   }
 }
+
+// Kurz hervorgehoben, wenn die Karte über eine Push-Benachrichtigung
+// geöffnet wurde (?termin=<id>), damit man sie in der Liste sofort findet.
+app-termin-karte {
+  display: block;
+  border-radius: 16px;
+  transition: box-shadow 0.3s ease;
+
+  &.hervorgehoben {
+    box-shadow: 0 0 0 3px var(--ion-color-primary);
+  }
+}

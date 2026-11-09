@@ -38,6 +38,25 @@
       Bearbeiten
     </ion-button>
 
+    <section class="benachrichtigungen">
+      @if (pushHinweis(); as hinweis) {
+        <p class="benachrichtigungen-titel">Benachrichtigungen</p>
+        <p class="benachrichtigungen-hinweis">{{ hinweis }}</p>
+      } @else {
+        <ion-toggle
+          justify="space-between"
+          [checked]="push.aktiv()"
+          [disabled]="pushLaedt()"
+          (ionChange)="benachrichtigungenUmschalten($event)"
+        >
+          Benachrichtigungen
+        </ion-toggle>
+      }
+      @if (pushFehler(); as fehler) {
+        <p class="benachrichtigungen-fehler" role="alert">{{ fehler }}</p>
+      }
+    </section>
+
     <ion-grid class="profil-aktionen">
       <ion-row>
         <ion-col size="6">

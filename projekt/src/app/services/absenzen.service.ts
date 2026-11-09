@@ -301,23 +301,17 @@ export class AbsenzenService {
   }
 
   /**
-   * Löscht alle noch bevorstehenden Instanzen einer Dauerauftrag-Serie
-   * (vergangene Wochen bleiben als Verlauf erhalten) und begrenzt danach
-   * das Verfalldatum der Basiszeile auf "gestern". Ohne diesen zweiten
-   * Schritt würde materialisiereFehlendeSerientermine() beim nächsten Laden
-   * die soeben gelöschten Wochen einfach wieder nachziehen, da die
-   * Basiszeile selbst (ist_dauerauftrag = true) weiterhin existiert.
+   * Begrenzt das Verfalldatum der Basiszeile auf "gestern" und löscht
+   * danach alle noch bevorstehenden Instanzen der Dauerauftrag-Serie
+   * (vergangene Wochen bleiben als Verlauf erhalten). Ohne das Verfalldatum
+   * würde materialisiereFehlendeSerientermine() beim nächsten Laden die
+   * gelöschten Wochen einfach wieder nachziehen, da die Basiszeile selbst
+   * (ist_dauerauftrag = true) weiterhin existiert. Die Reihenfolge ist
+   * wichtig für Push: die Änderung an der Basiszeile löst genau eine
+   * "Serie gelöscht"-Nachricht aus und sperrt kurz die Nachrichten der
+   * danach gelöschten Wochen (siehe 0016_push_benachrichtigungen.sql).
    */
   async loescheSerie(basisId: string): Promise<void> {
-    const { error: loeschError } = await this.supabase
-      .from('trainings_anlaesse')
-      .delete()
-      .eq('ausnahme_von_id', basisId)
-      .gte('start', new Date().toISOString());
-    if (loeschError) {
-      throw new Error(loeschError.message);
-    }
-
     const gestern = new Date();
     gestern.setDate(gestern.getDate() - 1);
     const verfalldatum = gestern.toISOString().slice(0, 10);
@@ -328,6 +322,15 @@ export class AbsenzenService {
       .eq('id', basisId);
     if (verfallError) {
       throw new Error(verfallError.message);
+    }
+
+    const { error: loeschError } = await this.supabase
+      .from('trainings_anlaesse')
+      .delete()
+      .eq('ausnahme_von_id', basisId)
+      .gte('start', new Date().toISOString());
+    if (loeschError) {
+      throw new Error(loeschError.message);
     }
   }
 

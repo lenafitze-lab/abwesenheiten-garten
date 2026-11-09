@@ -2,6 +2,8 @@
 
 Eine PWA (Ionic/Angular + Supabase) für die Voltigier-Gruppe **Garten Sen. 1** des Vereins Garten: Mitglieder tragen ihre Abwesenheiten für Trainings und Anlässe ein, der Trainer behält den Überblick, und eine gemeinsame Packliste hilft bei der Turniervorbereitung.
 
+**App öffnen:** [lenafitze-lab.github.io/abwesenheiten-garten](https://lenafitze-lab.github.io/abwesenheiten-garten/)
+
 ![Übersicht der Voltige Garten App](image.png)
 
 ## Inhalt
@@ -50,11 +52,11 @@ Die Zuteilung erfolgt über separate Einladungscodes bei der Registrierung (Grup
 
 ## Installation
 
-Voraussetzungen: Node.js, npm, ein Supabase-Projekt.
+Voraussetzungen: Node.js 24 (oder mindestens 22.22.3), npm, ein Supabase-Projekt.
 
 ```bash
-git clone https://gitlab.santis-basis.ch/il24/335-lena.git
-cd 335-lena/projekt
+git clone https://github.com/lenafitze-lab/abwesenheiten-garten.git
+cd abwesenheiten-garten/projekt
 npm install
 ```
 
@@ -68,10 +70,10 @@ export const environment = {
 };
 ```
 
-App lokal starten:
+App lokal starten (läuft danach unter http://localhost:4200):
 
 ```bash
-ionic serve
+npm start
 ```
 
 ## Verwendung
@@ -86,16 +88,16 @@ Für die beste Erfahrung auf dem iPhone die App über **"Zum Home-Bildschirm hin
 
 ```
 /projekt      Quellcode der App (Ionic/Angular)
-/journal      Entwicklungstagebuch, ausserhalb des AI-Code-Prozesses geführt
+/jounal       Entwicklungstagebuch, ausserhalb des AI-Code-Prozesses geführt
 /store        Projektbeschreibung
-CHANGELOG.md  Release-Historie
+changelog.md  Release-Historie
 ```
 
 ## Dokumentation
 
-- [Journal](/journal) – chronologischer Entwicklungsverlauf mit Begründungen für wichtige Entscheidungen
-- [CHANGELOG.md](CHANGELOG.md) – alle Releases im Überblick
-- [/store](/store) – ausführliche Projektbeschreibung
+- [Journal](jounal) – chronologischer Entwicklungsverlauf mit Begründungen für wichtige Entscheidungen
+- [changelog.md](changelog.md) – alle Releases im Überblick
+- [/store](store) – ausführliche Projektbeschreibung
 
 ## Projektstatus
 
@@ -103,4 +105,4 @@ Aktiv in Entwicklung. Die App wird über die ursprüngliche Abgabe hinaus für d
 
 ## Autorin
 
-Lena Fitze# abwesenheiten-garten
+Lena Fitze

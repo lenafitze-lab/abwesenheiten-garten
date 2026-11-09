@@ -75,6 +75,32 @@
   --border-radius: 12px;
 }
 
+.benachrichtigungen {
+  margin-bottom: 28px;
+  text-align: left;
+
+  ion-toggle {
+    width: 100%;
+    font-weight: 600;
+  }
+}
+
+.benachrichtigungen-titel {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.benachrichtigungen-hinweis,
+.benachrichtigungen-fehler {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.benachrichtigungen-fehler {
+  color: var(--ion-color-danger);
+}
+
 .profil-aktionen {
   padding: 20px 0 0;
   // War zuvor var(--ion-color-step-150, var(--ion-border-color, #dedede)) -

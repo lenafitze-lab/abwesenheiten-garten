@@ -104,5 +104,9 @@ describe('AbsenzenService', () => {
       expect.objectContaining({ verfalldatum: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/) }),
     );
     expect(updateEqMock).toHaveBeenCalledWith('id', 'basis-1');
+
+    // Basiszeile zuerst: nur so löst "Serie löschen" genau eine Push-Nachricht
+    // aus statt einer pro gelöschter Woche (Sperre im Datenbank-Trigger).
+    expect(updateMock.mock.invocationCallOrder[0]).toBeLessThan(deleteMock.mock.invocationCallOrder[0]);
   });
 });

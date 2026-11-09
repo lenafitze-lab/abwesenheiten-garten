@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {
   IonHeader,
@@ -137,9 +137,49 @@ export class AbwesenheitenPage {
     }
   });
 
+  /** Query-Parameter "?termin=<event_id>" - gesetzt beim Antippen einer Push-Benachrichtigung. */
+  readonly termin = input<string | undefined>();
+  readonly hervorgehobenId = signal<string | null>(null);
+  private nachgeladenFuer: string | null = null;
+  private gezeigtFuer: string | null = null;
+
   constructor() {
     addIcons({ addOutline });
     void this.laden();
+    effect(() => {
+      const gesucht = this.termin();
+      if (gesucht && gesucht !== this.gezeigtFuer && !this.ladend()) {
+        untracked(() => this.zeigeTermin(gesucht));
+      }
+    });
+  }
+
+  /**
+   * Springt zur Karte des Termins aus der Benachrichtigung. Tage eines
+   * mehrtägigen Anlasses haben keine eigene Karte, dann zählt die Karte des
+   * ganzen Anlasses. Ist der Termin noch nicht in der Liste (App war schon
+   * offen), wird einmal neu geladen.
+   */
+  private zeigeTermin(eventId: string): void {
+    const karte = this.alleAnzeigen().find(
+      (t) => t.id === eventId || t.tage?.some((tag) => tag.eventId === eventId),
+    );
+    if (!karte?.id) {
+      if (this.nachgeladenFuer !== eventId) {
+        this.nachgeladenFuer = eventId;
+        void this.laden();
+      }
+      return;
+    }
+
+    const istVorbei = this.vergangen().some((t) => t.id === karte.id);
+    this.segment.set(istVorbei ? 'abgeschlossen' : 'alle');
+    this.gezeigtFuer = eventId;
+    this.hervorgehobenId.set(karte.id);
+    setTimeout(() => {
+      document.getElementById(`termin-${karte.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    setTimeout(() => this.hervorgehobenId.set(null), 3000);
   }
 
   onSegmentChange(value: string | number | undefined): void {

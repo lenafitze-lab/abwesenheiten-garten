@@ -44,7 +44,12 @@
     }
     <div class="termin-list">
       @for (termin of currentList(); track termin.start + termin.titel) {
-        <app-termin-karte [termin]="termin" (terminGeaendert)="laden()"></app-termin-karte>
+        <app-termin-karte
+          [termin]="termin"
+          [attr.id]="'termin-' + termin.id"
+          [class.hervorgehoben]="termin.id !== null && termin.id === hervorgehobenId()"
+          (terminGeaendert)="laden()"
+        ></app-termin-karte>
       } @empty {
         <p class="fehler-hinweis">Keine Einträge.</p>
       }
